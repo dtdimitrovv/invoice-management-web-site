@@ -136,6 +136,25 @@
     </div>
   </div>
 
+  <!-- Signatures Section -->
+  <div class="signatures-section">
+    <div class="signature-block">
+      <div class="signature-label">Фактурата e получена от: <span class="signature-name">{{ invoice?.client?.responsibleOfficerName }}</span></div>
+      <div class="signature-line">Подпис: .................................</div>
+    </div>
+    
+    <div class="signature-block">
+      <div class="signature-label">Фактурата е съставена от: <span class="signature-name">{{ invoice?.provider?.responsibleOfficerName }}</span></div>
+      <div class="signature-line">Подпис: .................................</div>
+    </div>
+  </div>
+
+  <!-- Legal Disclaimer -->
+  <div class="legal-disclaimer">
+    <p>Печатът и подписът не са задължителни реквизити на фактурата съгласно<br>
+    чл.7, ал. 1 от Закона за счетоводството, чл.114 от ЗДДС и чл.78 от ППЗДДС</p>
+  </div>
+
   <div class="invoice-actions">
     <button class="back-button" (click)="goBack()">Назад</button>
     <button class="print-button" (click)="printInvoice()">Печат</button>
