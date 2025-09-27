@@ -62,12 +62,8 @@
           <span class="value">{{ invoice?.provider?.responsibleOfficerName }}</span>
         </div>
         <div class="detail-row">
-          <span class="label">BIC:</span>
-          <span class="value">{{ invoice?.provider?.bankIdentifierCode }}</span>
-        </div>
-        <div class="detail-row">
-          <span class="label">Банка:</span>
-          <span class="value">{{ invoice?.provider?.bankName }}</span>
+          <span class="label">BIC/Банка:</span>
+          <span class="value">{{ invoice?.provider?.bankIdentifierCode }}/{{ invoice?.provider?.bankName }}</span>
         </div>
         <div class="detail-row">
           <span class="label">IBAN:</span>
