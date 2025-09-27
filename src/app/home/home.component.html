@@ -3,12 +3,12 @@
   
   @if (loading) {
     <div class="loading">
-      <p>Loading invoices...</p>
+      <p>Зареждане на фактури...</p>
     </div>
   } @else if (error) {
     <div class="error">
       <p>{{ error }}</p>
-      <button (click)="loadInvoices()">Retry</button>
+      <button (click)="loadInvoices()">Опитай отново</button>
     </div>
   } @else {
     <div class="table-container">

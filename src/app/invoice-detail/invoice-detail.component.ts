@@ -65,4 +65,20 @@ export class InvoiceDetailComponent implements OnInit {
   printInvoice(): void {
     window.print();
   }
+
+  getTaxableBase(): number {
+    return this.invoice?.totalPriceWithoutVatInBulgarianLev || 0;
+  }
+
+  getVAT(): number {
+    return this.invoice?.vatSumInBulgarianLev || 0;
+  }
+
+  getTotalAmountInBulgarianLev(): number {
+    return this.invoice?.totalPriceWithVatInBulgarianLev || 0;
+  }
+
+  getTotalAmountInEuro(): number {
+    return this.invoice?.totalPriceWithVatInEuro || 0;
+  }
 }

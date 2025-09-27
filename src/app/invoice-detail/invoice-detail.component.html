@@ -9,6 +9,11 @@
       <div class="invoice-number-section">
         <div class="invoice-number">Фактура №{{ getFormattedInvoiceNumber() }}</div>
       </div>
+
+      <div class="invoice-location-section">
+        <label>Място на издаване:</label>
+        <div class="invoice-location">{{ invoice?.issueLocation }}</div>
+      </div>
     </div>
   </div>
 
@@ -29,6 +34,10 @@
           <span class="label">Адрес:</span>
           <span class="value">{{ invoice?.client?.address }}</span>
         </div>
+        <div class="detail-row">
+          <span class="label">МОЛ:</span>
+          <span class="value">{{ invoice?.client?.responsibleOfficerName }}</span>
+        </div>
       </div>
     </div>
 
@@ -47,6 +56,22 @@
         <div class="detail-row">
           <span class="label">Адрес:</span>
           <span class="value">{{ invoice?.provider?.address }}</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">МОЛ:</span>
+          <span class="value">{{ invoice?.provider?.responsibleOfficerName }}</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">BIC:</span>
+          <span class="value">{{ invoice?.provider?.bankIdentifierCode }}</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">Банка:</span>
+          <span class="value">{{ invoice?.provider?.bankName }}</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">IBAN:</span>
+          <span class="value">{{ invoice?.provider?.iban }}</span>
         </div>
       </div>
     </div>
@@ -74,11 +99,44 @@
               <td class="col-quantity">{{ item.quantity }}</td>
               <td class="col-unit-price">{{ item.unitPrice | number:'1.2-2' }}</td>
               <td class="col-discount">{{ item.discount | number:'1.2-2' }}%</td>
-              <td class="col-total">{{ item.totalPrice | number:'1.2-2' }}</td>
+              <td class="col-total">{{ item.totalPriceInBulgarianLev | number:'1.2-2' }}</td>
             </tr>
           }
         </tbody>
       </table>
+    </div>
+  </div>
+
+  <!-- Financial Summary Section -->
+  <div class="financial-summary-section">
+    <div class="verbal-total">
+      <div class="verbal-total-label">Словом в лева:</div>
+      <div class="verbal-total-value">{{ invoice?.verbalTotalPriceWithVatInBulgarianLev || 'Не е посочена' }}</div>
+      <div class="verbal-total-label">Словом в евро:</div>
+      <div class="verbal-total-value">{{ invoice?.verbalTotalPriceWithVatInEuro || 'Не е посочена' }}</div>
+    </div>
+    
+    <div class="financial-calculations">
+      <div class="calculation-row">
+        <span class="calculation-label">Данъчна основа:</span>
+        <span class="calculation-value">{{ getTaxableBase() | number:'1.2-2' }}</span>
+      </div>
+      <div class="calculation-row">
+        <span class="calculation-label">Ставка ДДС:</span>
+        <span class="calculation-value">20%</span>
+      </div>
+      <div class="calculation-row">
+        <span class="calculation-label">ДДС:</span>
+        <span class="calculation-value">{{ getVAT() | number:'1.2-2' }}</span>
+      </div>
+        <div class="calculation-row">
+          <span class="calculation-label">Сума за плащане в лева:</span>
+          <span class="calculation-value">{{ getTotalAmountInBulgarianLev() | number:'1.2-2' }}</span>
+        </div>
+        <div class="calculation-row">
+          <span class="calculation-label">Сума за плащане в евро:</span>
+          <span class="calculation-value">{{ getTotalAmountInEuro() | number:'1.2-2' }}</span>
+        </div>
     </div>
   </div>
 

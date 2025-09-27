@@ -3,7 +3,7 @@ export interface InvoiceContent {
   unitPrice: number;
   quantity: number;
   discount: number;
-  totalPrice: number;
+  totalPriceInBulgarianLev: number;
 }
 
 export interface Company {
@@ -27,7 +27,12 @@ export interface Invoice {
   provider: Company;
   client: Company;
   contents: InvoiceContent[];
-  verbalTotalPrice: string | null;
+  totalPriceWithoutVatInBulgarianLev: number;
+  totalPriceWithVatInBulgarianLev: number;
+  totalPriceWithVatInEuro: number;
+  vatSumInBulgarianLev: number;
+  verbalTotalPriceWithVatInBulgarianLev: string;
+  verbalTotalPriceWithVatInEuro: string;
 }
 
 export interface Pageable {

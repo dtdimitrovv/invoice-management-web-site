@@ -32,6 +32,16 @@
   font-size: 16px;
 }
 
+.invoice-location-section label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.invoice-location {
+  font-size: 16px;
+}
+
 .invoice-number-section {
   flex: 2;
 }
@@ -199,6 +209,64 @@
   text-align: center;
 }
 
+.financial-summary-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+}
+
+.verbal-total {
+  flex: 1;
+  margin-right: 40px;
+}
+
+.verbal-total-label {
+  font-weight: bold;
+  font-size: 14px;
+  color: #495057;
+  margin-bottom: 8px;
+}
+
+.verbal-total-value {
+  font-size: 16px;
+  color: #333;
+  line-height: 1.4;
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+.financial-calculations {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.calculation-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.calculation-label {
+  font-weight: bold;
+  font-size: 16px;
+  color: #333;
+}
+
+.calculation-value {
+  font-weight: bold;
+  font-size: 16px;
+  color: #333;
+  text-align: right;
+  min-width: 100px;
+}
+
 .invoice-actions {
   display: flex;
   justify-content: center;
@@ -283,5 +351,25 @@
   .col-discount,
   .col-total {
     width: 12%;
+  }
+
+  .financial-summary-section {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .verbal-total {
+    margin-right: 0;
+  }
+
+  .calculation-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  .calculation-value {
+    text-align: left;
+    min-width: auto;
   }
 }
