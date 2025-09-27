@@ -8,6 +8,7 @@
       
       <div class="invoice-number-section">
         <div class="invoice-number">Фактура №{{ getFormattedInvoiceNumber() }}</div>
+        <div class="invoice-type" *ngIf="invoiceType">{{ invoiceType }}</div>
       </div>
 
       <div class="invoice-location-section">
@@ -157,6 +158,7 @@
 
   <div class="invoice-actions">
     <button class="back-button" (click)="goBack()">Назад</button>
-    <button class="print-button" (click)="printInvoice()">Печат</button>
+    <button class="print-original-button" (click)="printInvoice('original')">Печат на оригинал</button>
+    <button class="print-copy-button" (click)="printInvoice('copy')">Печат на копие</button>
   </div>
 </div>
