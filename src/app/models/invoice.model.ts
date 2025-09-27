@@ -3,6 +3,7 @@ export interface InvoiceContent {
   unitPrice: number;
   quantity: number;
   discount: number;
+  totalPrice: number;
 }
 
 export interface Company {
@@ -26,6 +27,7 @@ export interface Invoice {
   provider: Company;
   client: Company;
   contents: InvoiceContent[];
+  verbalTotalPrice: string | null;
 }
 
 export interface Pageable {

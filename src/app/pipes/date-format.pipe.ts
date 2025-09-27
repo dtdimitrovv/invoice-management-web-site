@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   standalone: true
 })
 export class DateFormatPipe implements PipeTransform {
-  transform(value: number[] | string): string {
+  transform(value: number[] | string | undefined): string {
     if (!value) return '';
     
     try {
@@ -20,15 +20,15 @@ export class DateFormatPipe implements PipeTransform {
         date = new Date(value);
       }
       
-      if (isNaN(date.getTime())) return Array.isArray(value) ? value.join('-') : value;
+      if (isNaN(date.getTime())) return Array.isArray(value) ? value.join('.') : value;
       
       const day = date.getDate().toString().padStart(2, '0');
       const month = (date.getMonth() + 1).toString().padStart(2, '0');
       const year = date.getFullYear();
       
-      return `${day}-${month}-${year}`;
+      return `${day}.${month}.${year}`;
     } catch (error) {
-      return Array.isArray(value) ? value.join('-') : value;
+      return Array.isArray(value) ? value.join('.') : value;
     }
   }
 }

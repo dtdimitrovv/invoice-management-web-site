@@ -1,0 +1,108 @@
+<div class="container">
+  <h1>{{ title }}</h1>
+  
+  @if (loading) {
+    <div class="loading">
+      <p>Loading invoices...</p>
+    </div>
+  } @else if (error) {
+    <div class="error">
+      <p>{{ error }}</p>
+      <button (click)="loadInvoices()">Retry</button>
+    </div>
+  } @else {
+    <div class="table-container">
+      <table class="invoice-table">
+        <thead>
+          <tr>
+            <th>Номер</th>
+            <th>Доставчик</th>
+            <th>Получател</th>
+            <th>Дата на издаване</th>
+            <th>Преглед</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (invoice of invoices; track invoice.id) {
+            <tr>
+              <td>{{ invoice.serialNumber }}</td>
+              <td>{{ invoice.provider.name }}</td>
+              <td>{{ invoice.client.name }}</td>
+              <td>{{ invoice.issueDate | dateFormat }}</td>
+              <td>
+                <button 
+                  class="view-button" 
+                  (click)="onViewInvoice(invoice)"
+                  title="Преглед на фактура"
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                  </svg>
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Page size selector -->
+    <div class="pagination-controls">
+      <div class="page-size-selector">
+        <label for="pageSize">Покажи по:</label>
+        <select 
+          id="pageSize" 
+          [ngModel]="pageSize" 
+          (ngModelChange)="onPageSizeChange($event)"
+          class="page-size-select"
+        >
+          @for (size of pageSizeOptions; track size) {
+            <option [value]="size">{{ size }}</option>
+          }
+        </select>
+        <span class="total-info">от {{ totalElements }} фактури</span>
+      </div>
+    </div>
+
+    <!-- Pagination controls -->
+    @if (totalPages > 1) {
+      <div class="pagination">
+        <button 
+          class="pagination-button" 
+          [disabled]="currentPage === 0"
+          (click)="onPageChange(currentPage - 1)"
+          title="Предишна страница"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+          </svg>
+          Предишна
+        </button>
+
+        <div class="page-numbers">
+          @for (page of getPageNumbers(); track page) {
+            <button 
+              class="page-number" 
+              [class.active]="page === currentPage"
+              (click)="onPageChange(page)"
+            >
+              {{ page + 1 }}
+            </button>
+          }
+        </div>
+
+        <button 
+          class="pagination-button" 
+          [disabled]="currentPage === totalPages - 1"
+          (click)="onPageChange(currentPage + 1)"
+          title="Следваща страница"
+        >
+          Следваща
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+          </svg>
+        </button>
+      </div>
+    }
+  }
+</div>

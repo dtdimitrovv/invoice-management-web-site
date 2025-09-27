@@ -1,0 +1,286 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2.5rem;
+  font-weight: 300;
+}
+
+.loading, .error {
+  text-align: center;
+  padding: 40px;
+  font-size: 1.2rem;
+}
+
+.error {
+  color: #dc3545;
+}
+
+.error button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.error button:hover {
+  background-color: #0056b3;
+}
+
+.table-container {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.invoice-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.invoice-table th {
+  background-color: #f8f9fa;
+  color: #495057;
+  font-weight: 600;
+  padding: 15px 12px;
+  text-align: left;
+  border-bottom: 2px solid #dee2e6;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.invoice-table td {
+  padding: 12px;
+  border-bottom: 1px solid #dee2e6;
+  vertical-align: middle;
+}
+
+.invoice-table tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+.invoice-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.view-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  font-size: 0.85rem;
+}
+
+.view-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+}
+
+.view-button svg {
+  margin-right: 4px;
+}
+
+.pagination-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 15px 0;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.page-size-selector {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 20px;
+}
+
+.page-size-selector label {
+  font-weight: 500;
+  color: #495057;
+}
+
+.page-size-select {
+  padding: 8px 12px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  background-color: white;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.page-size-select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.total-info {
+  color: #6c757d;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-right: 20px;
+}
+
+.pagination-button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 15px;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #495057;
+  transition: all 0.2s ease;
+}
+
+.pagination-button:hover:not(:disabled) {
+  background-color: #e9ecef;
+  border-color: #adb5bd;
+}
+
+.pagination-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.page-numbers {
+  display: flex;
+  gap: 5px;
+}
+
+.page-number {
+  padding: 10px 12px;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #495057;
+  transition: all 0.2s ease;
+  min-width: 40px;
+  text-align: center;
+}
+
+.page-number:hover {
+  background-color: #e9ecef;
+  border-color: #adb5bd;
+}
+
+.page-number.active {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: white;
+}
+
+.page-number.active:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+
+  .invoice-table {
+    font-size: 0.85rem;
+  }
+
+  .invoice-table th,
+  .invoice-table td {
+    padding: 8px 6px;
+  }
+
+  .pagination-controls {
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px;
+  }
+
+  .page-size-selector {
+    margin-left: 0;
+    justify-content: center;
+  }
+
+  .pagination {
+    margin-right: 0;
+    justify-content: center;
+  }
+
+  .page-numbers {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .pagination-button {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+  }
+
+  .page-number {
+    padding: 8px 10px;
+    font-size: 0.8rem;
+    min-width: 35px;
+  }
+}
+
+@media (max-width: 480px) {
+  .invoice-table {
+    font-size: 0.8rem;
+  }
+
+  .invoice-table th,
+  .invoice-table td {
+    padding: 6px 4px;
+  }
+
+  .view-button {
+    padding: 6px 8px;
+    font-size: 0.8rem;
+  }
+
+  .view-button svg {
+    width: 14px;
+    height: 14px;
+  }
+}

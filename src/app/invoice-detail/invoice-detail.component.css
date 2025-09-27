@@ -1,0 +1,287 @@
+.invoice-detail-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: white;
+}
+
+.invoice-header {
+  border-bottom: 2px solid #333;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.invoice-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.date-section {
+  flex: 1;
+}
+
+.date-section label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.date-value {
+  font-size: 16px;
+}
+
+.invoice-number-section {
+  flex: 2;
+}
+
+.invoice-number {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.original-label {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.barcode-section {
+  flex: 1;
+  text-align: right;
+}
+
+.barcode-placeholder {
+  font-family: 'Courier New', monospace;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.invoice-content {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 30px;
+}
+
+.recipient-section,
+.supplier-section {
+  flex: 1;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.recipient-section h3,
+.supplier-section h3 {
+  text-align: center;
+  margin: 0 0 20px 0;
+  font-size: 18px;
+  font-weight: bold;
+  border-bottom: 1px solid #333;
+  padding-bottom: 10px;
+}
+
+.company-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.company-name {
+  font-weight: bold;
+  text-align: center;
+  font-size: 16px;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.detail-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.label {
+  font-weight: bold;
+  min-width: 100px;
+  flex-shrink: 0;
+}
+
+.value {
+  flex: 1;
+  text-align: left;
+  word-wrap: break-word;
+}
+
+.invoice-items-section {
+  margin-bottom: 30px;
+}
+
+.invoice-items-section h3 {
+  text-align: center;
+  margin: 0 0 20px 0;
+  font-size: 18px;
+  font-weight: bold;
+  border-bottom: 1px solid #333;
+  padding-bottom: 10px;
+}
+
+.items-table-container {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.items-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.items-table th {
+  background-color: #f8f9fa;
+  color: #495057;
+  font-weight: 600;
+  padding: 12px 8px;
+  text-align: center;
+  border-bottom: 2px solid #dee2e6;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.items-table td {
+  padding: 10px 8px;
+  border-bottom: 1px solid #dee2e6;
+  vertical-align: middle;
+}
+
+.items-table tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+.items-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Column widths */
+.col-number {
+  width: 6%;
+  text-align: center;
+}
+
+.col-description {
+  width: 35%;
+  text-align: center;
+}
+
+.col-quantity {
+  width: 10%;
+  text-align: center;
+}
+
+.col-unit-price {
+  width: 12%;
+  text-align: center;
+}
+
+.col-discount {
+  width: 12%;
+  text-align: center;
+}
+
+.col-total {
+  width: 12%;
+  text-align: center;
+}
+
+.invoice-actions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #ddd;
+}
+
+.back-button,
+.print-button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.back-button {
+  background-color: #6c757d;
+  color: white;
+}
+
+.back-button:hover {
+  background-color: #5a6268;
+}
+
+.print-button {
+  background-color: #007bff;
+  color: white;
+}
+
+.print-button:hover {
+  background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+  .invoice-detail-container {
+    padding: 10px;
+  }
+
+  .invoice-info {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+
+  .invoice-content {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .detail-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  .value {
+    text-align: left;
+  }
+
+  .items-table {
+    font-size: 0.85rem;
+  }
+
+  .items-table th,
+  .items-table td {
+    padding: 8px 4px;
+  }
+
+  .col-description {
+    width: 30%;
+  }
+
+  .col-quantity {
+    width: 8%;
+  }
+
+  .col-unit-price,
+  .col-discount,
+  .col-total {
+    width: 12%;
+  }
+}
