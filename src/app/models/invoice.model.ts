@@ -21,21 +21,42 @@ export interface Company {
 export interface Invoice {
   id: number;
   serialNumber: number;
-  issueDate: string;
+  issueDate: number[];
   issueLocation: string;
   provider: Company;
   client: Company;
   contents: InvoiceContent[];
 }
 
-export interface InvoicePage {
-  size: number;
-  number: number;
-  totalElements: number;
-  totalPages: number;
+export interface Pageable {
+  pageNumber: number;
+  pageSize: number;
+  sort: {
+    empty: boolean;
+    unsorted: boolean;
+    sorted: boolean;
+  };
+  offset: number;
+  unpaged: boolean;
+  paged: boolean;
+}
+
+export interface Sort {
+  empty: boolean;
+  unsorted: boolean;
+  sorted: boolean;
 }
 
 export interface InvoiceResponse {
   content: Invoice[];
-  page: InvoicePage;
+  pageable: Pageable;
+  last: boolean;
+  totalPages: number;
+  totalElements: number;
+  size: number;
+  number: number;
+  sort: Sort;
+  numberOfElements: number;
+  first: boolean;
+  empty: boolean;
 }

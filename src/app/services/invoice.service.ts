@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { InvoiceResponse } from '../models/invoice.model';
 
@@ -11,7 +11,11 @@ export class InvoiceService {
 
   constructor(private http: HttpClient) { }
 
-  getInvoices(): Observable<InvoiceResponse> {
-    return this.http.get<InvoiceResponse>(this.apiUrl);
+  getInvoices(page: number = 0, size: number = 5): Observable<InvoiceResponse> {
+    const params = new HttpParams()
+      .set('page', page.toString())
+      .set('size', size.toString());
+    
+    return this.http.get<InvoiceResponse>(this.apiUrl, { params });
   }
 }
