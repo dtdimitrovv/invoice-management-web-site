@@ -2,12 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { InvoiceResponse } from '../models/invoice.model';
+import { CompanyResponse } from '../models/company.model';
+import { CreateInvoiceRequest } from '../models/invoice-item.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InvoiceService {
   private apiUrl = 'http://localhost:8080/invoices';
+  private companiesUrl = 'http://localhost:8080/companies';
 
   constructor(private http: HttpClient) { }
 
@@ -17,5 +20,13 @@ export class InvoiceService {
       .set('size', size.toString());
     
     return this.http.get<InvoiceResponse>(this.apiUrl, { params });
+  }
+
+  getCompanies(): Observable<CompanyResponse> {
+    return this.http.get<CompanyResponse>(this.companiesUrl);
+  }
+
+  createInvoice(invoiceData: CreateInvoiceRequest): Observable<any> {
+    return this.http.post(this.apiUrl, invoiceData);
   }
 }

@@ -1,5 +1,13 @@
 <div class="container">
-  <h1>{{ title }}</h1>
+  <div class="header-section">
+    <h1>{{ title }}</h1>
+    <button class="add-invoice-button" (click)="openCreateInvoiceModal()">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+      </svg>
+      Добави фактура
+    </button>
+  </div>
   
   @if (loading) {
     <div class="loading">
@@ -105,4 +113,11 @@
       </div>
     }
   }
+
+  <!-- Create Invoice Modal -->
+  <app-create-invoice-modal 
+    [isOpen]="isCreateModalOpen"
+    (close)="closeCreateInvoiceModal()"
+    (invoiceCreated)="onInvoiceCreated($event)"
+  ></app-create-invoice-modal>
 </div>

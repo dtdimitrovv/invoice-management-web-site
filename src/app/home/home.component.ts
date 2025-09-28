@@ -5,11 +5,12 @@ import { FormsModule } from '@angular/forms';
 import { InvoiceService } from '../services/invoice.service';
 import { Invoice, InvoiceResponse } from '../models/invoice.model';
 import { DateFormatPipe } from '../pipes/date-format.pipe';
+import { CreateInvoiceModalComponent } from '../create-invoice-modal/create-invoice-modal.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, FormsModule, DateFormatPipe],
+  imports: [CommonModule, FormsModule, DateFormatPipe, CreateInvoiceModalComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -25,6 +26,9 @@ export class HomeComponent implements OnInit {
   totalElements = 0;
   totalPages = 0;
   pageSizeOptions = [5, 10, 20, 25, 50, 100];
+
+  // Modal properties
+  isCreateModalOpen = false;
 
   constructor(
     private invoiceService: InvoiceService,
@@ -91,5 +95,19 @@ export class HomeComponent implements OnInit {
 
   onViewInvoice(invoice: Invoice): void {
     this.router.navigate(['/invoice', invoice.id]);
+  }
+
+  openCreateInvoiceModal(): void {
+    this.isCreateModalOpen = true;
+  }
+
+  closeCreateInvoiceModal(): void {
+    this.isCreateModalOpen = false;
+  }
+
+  onInvoiceCreated(invoiceData: any): void {
+    console.log('Invoice created:', invoiceData);
+    // Here you would typically refresh the invoice list
+    this.loadInvoices();
   }
 }
