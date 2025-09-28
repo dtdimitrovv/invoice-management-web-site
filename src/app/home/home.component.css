@@ -116,6 +116,38 @@ h1 {
   border-bottom: none;
 }
 
+/* Center content in specific columns */
+.invoice-table td:nth-child(1),
+.invoice-table th:nth-child(1) {
+  text-align: center;
+}
+
+.invoice-table td:nth-child(2),
+.invoice-table th:nth-child(2) {
+  text-align: center;
+}
+
+.invoice-table td:nth-child(3),
+.invoice-table th:nth-child(3) {
+  text-align: center;
+}
+
+.invoice-table td:nth-child(4),
+.invoice-table th:nth-child(4) {
+  text-align: center;
+}
+
+.invoice-table td:nth-child(5),
+.invoice-table th:nth-child(5) {
+  text-align: center;
+}
+
+.invoice-table td:nth-child(5) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .view-button {
   background-color: #007bff;
   color: white;
