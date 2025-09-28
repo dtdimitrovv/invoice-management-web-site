@@ -14,11 +14,15 @@ export class InvoiceService {
 
   constructor(private http: HttpClient) { }
 
-  getInvoices(page: number = 0, size: number = 5, sort: string = 'issueDate,desc'): Observable<InvoiceResponse> {
-    const params = new HttpParams()
+  getInvoices(page: number = 0, size: number = 5, sort: string[] = ['issueDate,desc', 'serialNumber,desc']): Observable<InvoiceResponse> {
+    let params = new HttpParams()
       .set('page', page.toString())
-      .set('size', size.toString())
-      .set('sort', sort);
+      .set('size', size.toString());
+    
+    // Add each sort parameter separately
+    sort.forEach(sortParam => {
+      params = params.append('sort', sortParam);
+    });
     
     return this.http.get<InvoiceResponse>(this.apiUrl, { params });
   }

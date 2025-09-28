@@ -73,8 +73,8 @@ export class HomeComponent implements OnInit {
     this.loading = true;
     this.error = null;
     
-    // Sort by issue date descending (newest first)
-    this.invoiceService.getInvoices(this.currentPage, this.pageSize, 'issueDate,desc').subscribe({
+    // Sort by issue date descending, then by serial number descending
+    this.invoiceService.getInvoices(this.currentPage, this.pageSize, ['issueDate,desc', 'serialNumber,desc']).subscribe({
       next: (response: InvoiceResponse) => {
         this.invoices = response.content || [];
         this.totalElements = response.totalElements || 0;

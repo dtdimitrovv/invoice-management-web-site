@@ -19,6 +19,7 @@
   max-width: 800px;
   max-height: 90vh;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .modal-header {
@@ -53,6 +54,7 @@
 
 .modal-body {
   padding: 20px;
+  overflow-x: hidden;
 }
 
 .form-group {
@@ -154,13 +156,14 @@
 
 .item-row {
   display: grid;
-  grid-template-columns: 1.5fr 0.7fr 0.7fr 0.7fr auto;
+  grid-template-columns: 2fr 1fr 1fr 1fr auto;
   gap: 6px;
   align-items: end;
   padding: 8px;
   background-color: #f8f9fa;
   border-radius: 6px;
   border: 1px solid #e9ecef;
+  min-width: 0;
 }
 
 .item-field {
@@ -181,6 +184,9 @@
   border-radius: 4px;
   font-size: 0.8rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .form-input:focus {
