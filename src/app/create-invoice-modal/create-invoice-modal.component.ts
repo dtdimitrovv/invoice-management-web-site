@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { InvoiceService } from '../services/invoice.service';
+import { ToastService } from '../services/toast.service';
 import { Company } from '../models/company.model';
 import { InvoiceItem, CreateInvoiceRequest, InvoiceContent } from '../models/invoice-item.model';
 
@@ -28,7 +29,9 @@ export class CreateInvoiceModalComponent implements OnInit {
   items: InvoiceItem[] = [];
   nextItemId = 1;
 
-  constructor(private invoiceService: InvoiceService) {}
+  // Inject services using the inject() function
+  private invoiceService = inject(InvoiceService);
+  private toastService = inject(ToastService);
 
   ngOnInit(): void {
     this.loadCompanies();
@@ -88,18 +91,18 @@ export class CreateInvoiceModalComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.selectedClientId && this.items.length > 0) {
+    // Convert items to the API format first
+    const contents: InvoiceContent[] = this.items
+      .filter(item => item.name.trim() !== '') // Only include items with names
+      .map(item => ({
+        serviceDescription: item.name,
+        unitPrice: Number(item.unitPrice),
+        quantity: Number(item.quantity),
+        discount: Number(item.discount)
+      }));
+    
+    if (this.selectedClientId && contents.length > 0) {
       this.loading = true;
-      
-      // Convert items to the API format
-      const contents: InvoiceContent[] = this.items
-        .filter(item => item.name.trim() !== '') // Only include items with names
-        .map(item => ({
-          serviceDescription: item.name,
-          unitPrice: Number(item.unitPrice),
-          quantity: Number(item.quantity),
-          discount: Number(item.discount)
-        }));
       
       const invoiceData: CreateInvoiceRequest = {
         clientId: this.selectedClientId,
@@ -110,16 +113,23 @@ export class CreateInvoiceModalComponent implements OnInit {
       this.invoiceService.createInvoice(invoiceData).subscribe({
         next: (response) => {
           this.loading = false;
+          this.toastService.success('Фактурата беше създадена успешно!');
           this.invoiceCreated.emit(invoiceData);
-          this.resetForm();
-          this.onClose();
+          this.resetForm(); // Reset the form for next use
+          // Don't call onClose() here - let the parent component handle closing
         },
         error: (error) => {
           console.error('Error creating invoice:', error);
           this.loading = false;
-          // You might want to show an error message to the user here
+          this.toastService.error('Възникна грешка при създаването на фактурата. Моля, опитайте отново.');
         }
       });
+    } else {
+      if (!this.selectedClientId) {
+        this.toastService.error('Моля, изберете клиент.');
+      } else if (contents.length === 0) {
+        this.toastService.error('Моля, добавете поне един артикул с име.');
+      }
     }
   }
 

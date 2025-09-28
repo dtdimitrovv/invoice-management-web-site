@@ -134,5 +134,7 @@ export class HomeComponent implements OnInit {
   onInvoiceCreated(invoiceData: any): void {
     // Refresh the invoice list after creating a new invoice
     this.loadInvoices();
+    // Close the modal
+    this.isCreateModalOpen = false;
   }
 }
