@@ -145,6 +145,21 @@
             }
           </div>
 
+<!-- VAT Exemption Section -->
+<div class="form-section">
+    <div class="form-group">
+      <label for="vatExemption">Основание за не начисляване на ДДС:</label>
+      <textarea 
+        id="vatExemption"
+        name="vatExemption"
+        [(ngModel)]="reasonForSkippingVat"
+        class="form-textarea"
+        placeholder="Въведете основание за не начисляване на ДДС"
+        rows="3"
+      ></textarea>
+    </div>
+  </div>
+
           <div class="form-actions">
             <button type="button" class="btn btn-secondary" (click)="onClose()">
               Отказ

@@ -21,6 +21,7 @@ export class CreateInvoiceModalComponent implements OnInit {
   suppliers: Company[] = [];
   selectedClientId: number | null = null;
   selectedSupplierId: number | null = null;
+  reasonForSkippingVat: string = '';
   loading = false;
   
   // Items management
@@ -101,7 +102,8 @@ export class CreateInvoiceModalComponent implements OnInit {
       
       const invoiceData: CreateInvoiceRequest = {
         clientId: this.selectedClientId,
-        contents: contents
+        contents: contents,
+        reasonForSkippingVat: this.reasonForSkippingVat.trim() || undefined
       };
       
       console.log('Sending invoice data:', invoiceData);
@@ -126,6 +128,7 @@ export class CreateInvoiceModalComponent implements OnInit {
   resetForm(): void {
     this.selectedClientId = null;
     this.selectedSupplierId = null;
+    this.reasonForSkippingVat = '';
     this.items = [];
     this.nextItemId = 1;
     

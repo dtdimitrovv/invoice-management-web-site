@@ -16,4 +16,5 @@ export interface InvoiceContent {
 export interface CreateInvoiceRequest {
   clientId: number;
   contents: InvoiceContent[];
+  reasonForSkippingVat?: string;
 }
