@@ -15,6 +15,7 @@ import { DateFormatPipe } from '../pipes/date-format.pipe';
 export class InvoiceDetailComponent implements OnInit {
   invoice: Invoice | undefined;
   invoiceType: string = '';
+  returnPage: number = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -25,6 +26,9 @@ export class InvoiceDetailComponent implements OnInit {
 
   ngOnInit(): void {
     const invoiceId = this.route.snapshot.paramMap.get('id');
+    const pageParam = this.route.snapshot.queryParamMap.get('page');
+    this.returnPage = pageParam ? +pageParam : 0;
+    
     if (invoiceId) {
       this.loadInvoice(+invoiceId);
     }

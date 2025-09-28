@@ -53,6 +53,7 @@ export class CreateInvoiceModalComponent implements OnInit {
   }
 
   onClose(): void {
+    this.resetForm();
     this.close.emit();
   }
 
@@ -106,11 +107,8 @@ export class CreateInvoiceModalComponent implements OnInit {
         reasonForSkippingVat: this.reasonForSkippingVat.trim() || undefined
       };
       
-      console.log('Sending invoice data:', invoiceData);
-      
       this.invoiceService.createInvoice(invoiceData).subscribe({
         next: (response) => {
-          console.log('Invoice created successfully:', response);
           this.loading = false;
           this.invoiceCreated.emit(invoiceData);
           this.resetForm();

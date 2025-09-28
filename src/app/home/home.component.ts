@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { InvoiceService } from '../services/invoice.service';
@@ -33,10 +33,33 @@ export class HomeComponent implements OnInit {
   constructor(
     private invoiceService: InvoiceService,
     @Inject(PLATFORM_ID) private platformId: Object,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    // Check for stored page in localStorage
+    if (isPlatformBrowser(this.platformId)) {
+      const storedPage = localStorage.getItem('invoiceListPage');
+      if (storedPage) {
+        this.currentPage = +storedPage;
+        // Clear the stored page after using it
+        localStorage.removeItem('invoiceListPage');
+      }
+    }
+    
+    // Also try to get page from query parameters as fallback
+    try {
+      if (this.route?.snapshot?.queryParamMap) {
+        const pageParam = this.route.snapshot.queryParamMap.get('page');
+        if (pageParam) {
+          this.currentPage = +pageParam;
+        }
+      }
+    } catch (error) {
+      // Route not available, continue with default page
+    }
+    
     // Only load invoices in browser environment, not during SSR
     if (isPlatformBrowser(this.platformId)) {
       this.loadInvoices();
@@ -95,6 +118,8 @@ export class HomeComponent implements OnInit {
   }
 
   onViewInvoice(invoice: Invoice): void {
+    // Store current page in localStorage before navigating
+    localStorage.setItem('invoiceListPage', this.currentPage.toString());
     this.router.navigate(['/invoice', invoice.id]);
   }
 
@@ -107,8 +132,7 @@ export class HomeComponent implements OnInit {
   }
 
   onInvoiceCreated(invoiceData: any): void {
-    console.log('Invoice created:', invoiceData);
-    // Here you would typically refresh the invoice list
+    // Refresh the invoice list after creating a new invoice
     this.loadInvoices();
   }
 }

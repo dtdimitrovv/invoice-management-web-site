@@ -66,27 +66,22 @@
   color: #495057;
 }
 
-.auto-selected-indicator {
-  font-size: 0.85rem;
-  color: #28a745;
-  font-weight: 400;
-  margin-left: 5px;
-}
-
-.form-select.auto-selected {
-  border-color: #28a745;
-  background-color: #f8fff9;
-}
-
 .form-select {
   width: 100%;
-  padding: 10px 12px;
+  padding: 10px 30px 10px 12px;
   border: 1px solid #ced4da;
   border-radius: 4px;
   background-color: white;
   font-size: 1rem;
   cursor: pointer;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m1 6 7 7 7-7'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 16px 12px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 .form-select:focus {
@@ -95,7 +90,11 @@
   box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
 }
 
-.form-select:invalid {
+.form-select:invalid:not(:focus) {
+  border-color: #ced4da;
+}
+
+.form-select.ng-invalid.ng-touched {
   border-color: #dc3545;
 }
 
@@ -214,8 +213,7 @@
 }
 
 .total-amount {
-  font-weight: 600;
-  color: #28a745;
+  font-weight: bold;
   font-size: 1rem;
 }
 
@@ -284,7 +282,7 @@
 }
 
 .btn-secondary {
-  background-color: #6c757d;
+  background-color: #c82333;
   color: white;
 }
 
