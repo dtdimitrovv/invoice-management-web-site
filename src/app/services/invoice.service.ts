@@ -14,10 +14,11 @@ export class InvoiceService {
 
   constructor(private http: HttpClient) { }
 
-  getInvoices(page: number = 0, size: number = 5): Observable<InvoiceResponse> {
+  getInvoices(page: number = 0, size: number = 5, sort: string = 'issueDate,desc'): Observable<InvoiceResponse> {
     const params = new HttpParams()
       .set('page', page.toString())
-      .set('size', size.toString());
+      .set('size', size.toString())
+      .set('sort', sort);
     
     return this.http.get<InvoiceResponse>(this.apiUrl, { params });
   }
