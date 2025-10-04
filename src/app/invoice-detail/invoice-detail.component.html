@@ -7,7 +7,7 @@
       </div>
       
       <div class="invoice-number-section">
-        <div class="invoice-number">Фактура №{{ getFormattedInvoiceNumber() }}</div>
+        <div class="invoice-number">Фактура №{{ invoice?.serialNumber }}</div>
         <div class="invoice-type" *ngIf="invoiceType">{{ invoiceType }}</div>
       </div>
 
@@ -111,6 +111,8 @@
       <div class="verbal-total-value">{{ invoice?.verbalTotalPriceWithVatInBulgarianLev || 'Не е посочена' }}</div>
       <div class="verbal-total-label">Словом в евро:</div>
       <div class="verbal-total-value">{{ invoice?.verbalTotalPriceWithVatInEuro || 'Не е посочена' }}</div>
+      <div class="verbal-total-label">Основание за не начисляване на ДДС:</div>
+      <div class="verbal-total-value">{{ invoice?.reasonForSkippingVat || 'Не е посочено' }}</div>
     </div>
     
     <div class="financial-calculations">

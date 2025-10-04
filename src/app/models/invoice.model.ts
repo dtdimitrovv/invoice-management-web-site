@@ -33,6 +33,7 @@ export interface Invoice {
   vatSumInBulgarianLev: number;
   verbalTotalPriceWithVatInBulgarianLev: string;
   verbalTotalPriceWithVatInEuro: string;
+  reasonForSkippingVat: string;
 }
 
 export interface Pageable {

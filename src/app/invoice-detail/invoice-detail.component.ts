@@ -59,11 +59,6 @@ export class InvoiceDetailComponent implements OnInit {
     return parts.length > 1 ? parts[1].trim() : address;
   }
 
-  getFormattedInvoiceNumber(): string {
-    if (!this.invoice?.serialNumber) return '0000000000';
-    return this.invoice.serialNumber.toString().padStart(10, '0');
-  }
-
   goBack(): void {
     this.router.navigate(['/']);
   }
