@@ -31,6 +31,7 @@ export class HomeComponent implements OnInit {
   // Modal properties
   isCreateModalOpen = false;
   isCreateCompanyModalOpen = false;
+  refreshInvoiceModalCompanies = false;
 
   constructor(
     private invoiceService: InvoiceService,
@@ -151,6 +152,11 @@ export class HomeComponent implements OnInit {
   onCompanyCreated(companyData: any): void {
     // Close the modal
     this.isCreateCompanyModalOpen = false;
-    // Note: We don't need to refresh anything here since companies are loaded separately
+    // Trigger refresh of company lists in invoice modal
+    this.refreshInvoiceModalCompanies = true;
+    // Reset the flag after a short delay to allow the change detection to work
+    setTimeout(() => {
+      this.refreshInvoiceModalCompanies = false;
+    }, 100);
   }
 }

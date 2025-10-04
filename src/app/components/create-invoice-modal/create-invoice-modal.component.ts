@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, OnInit, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit, OnChanges, SimpleChanges, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { InvoiceService } from '../../services/invoice.service';
@@ -13,8 +13,9 @@ import { InvoiceItem, CreateInvoiceRequest, InvoiceContent } from '../../models/
   templateUrl: './create-invoice-modal.component.html',
   styleUrl: './create-invoice-modal.component.css'
 })
-export class CreateInvoiceModalComponent implements OnInit {
+export class CreateInvoiceModalComponent implements OnInit, OnChanges {
   @Input() isOpen = false;
+  @Input() refreshCompanies = false;
   @Output() close = new EventEmitter<void>();
   @Output() invoiceCreated = new EventEmitter<CreateInvoiceRequest>();
 
@@ -36,6 +37,12 @@ export class CreateInvoiceModalComponent implements OnInit {
   ngOnInit(): void {
     this.loadCompanies();
     this.addItem(); // Add one item by default
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['refreshCompanies'] && changes['refreshCompanies'].currentValue === true) {
+      this.loadCompanies();
+    }
   }
 
   loadCompanies(): void {

@@ -125,6 +125,7 @@
   <!-- Create Invoice Modal -->
   <app-create-invoice-modal 
     [isOpen]="isCreateModalOpen"
+    [refreshCompanies]="refreshInvoiceModalCompanies"
     (close)="closeCreateInvoiceModal()"
     (invoiceCreated)="onInvoiceCreated($event)"
   ></app-create-invoice-modal>
