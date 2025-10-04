@@ -19,6 +19,44 @@ h1 {
   font-weight: 300;
 }
 
+.button-group {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.add-company-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(40, 167, 69, 0.2);
+}
+
+.add-company-button:hover {
+  background-color: #218838;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
+}
+
+.add-company-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(40, 167, 69, 0.2);
+}
+
+.add-company-button svg {
+  width: 20px;
+  height: 20px;
+}
+
 .add-invoice-button {
   display: flex;
   align-items: center;
@@ -298,8 +336,16 @@ h1 {
     text-align: center;
   }
 
+  .button-group {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .add-company-button,
   .add-invoice-button {
     justify-content: center;
+    flex: 1;
+    min-width: 150px;
   }
 
   .invoice-table {

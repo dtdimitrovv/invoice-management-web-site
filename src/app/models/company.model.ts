@@ -11,6 +11,17 @@ export interface Company {
   iban: string;
 }
 
+export interface CompanyCreationRequest {
+  name: string;
+  address: string;
+  identityNumber: string;
+  vatNumber: string;
+  responsibleOfficerName: string;
+  bankIdentifierCode: string;
+  bankName: string;
+  iban: string;
+}
+
 export interface CompanyResponse {
   content: Company[];
   pageable: {

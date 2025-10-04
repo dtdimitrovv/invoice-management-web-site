@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { InvoiceResponse } from '../models/invoice.model';
-import { CompanyResponse } from '../models/company.model';
+import { CompanyResponse, CompanyCreationRequest } from '../models/company.model';
 import { CreateInvoiceRequest } from '../models/invoice-item.model';
 
 @Injectable({
@@ -33,5 +33,9 @@ export class InvoiceService {
 
   createInvoice(invoiceData: CreateInvoiceRequest): Observable<any> {
     return this.http.post(this.apiUrl, invoiceData);
+  }
+
+  createCompany(companyData: CompanyCreationRequest): Observable<any> {
+    return this.http.post(this.companiesUrl, companyData);
   }
 }
