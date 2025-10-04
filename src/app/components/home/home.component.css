@@ -25,6 +25,38 @@ h1 {
   align-items: center;
 }
 
+.list-companies-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 123, 255, 0.2);
+}
+
+.list-companies-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+}
+
+.list-companies-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 123, 255, 0.2);
+}
+
+.list-companies-button svg {
+  width: 20px;
+  height: 20px;
+}
+
 .add-company-button {
   display: flex;
   align-items: center;
@@ -341,6 +373,7 @@ h1 {
     flex-wrap: wrap;
   }
 
+  .list-companies-button,
   .add-company-button,
   .add-invoice-button {
     justify-content: center;

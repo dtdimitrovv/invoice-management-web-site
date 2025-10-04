@@ -4,14 +4,16 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { InvoiceService } from '../../services/invoice.service';
 import { Invoice, InvoiceResponse } from '../../models/invoice.model';
+import { Company } from '../../models/company.model';
 import { DateFormatPipe } from '../../pipes/date-format.pipe';
 import { CreateInvoiceModalComponent } from '../create-invoice-modal/create-invoice-modal.component';
 import { CreateCompanyModalComponent } from '../create-company-modal/create-company-modal.component';
+import { CompaniesListModalComponent } from '../companies-list-modal/companies-list-modal.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, FormsModule, DateFormatPipe, CreateInvoiceModalComponent, CreateCompanyModalComponent],
+  imports: [CommonModule, FormsModule, DateFormatPipe, CreateInvoiceModalComponent, CreateCompanyModalComponent, CompaniesListModalComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -31,6 +33,7 @@ export class HomeComponent implements OnInit {
   // Modal properties
   isCreateModalOpen = false;
   isCreateCompanyModalOpen = false;
+  isCompaniesListModalOpen = false;
   refreshInvoiceModalCompanies = false;
 
   constructor(
@@ -158,5 +161,13 @@ export class HomeComponent implements OnInit {
     setTimeout(() => {
       this.refreshInvoiceModalCompanies = false;
     }, 100);
+  }
+
+  openCompaniesListModal(): void {
+    this.isCompaniesListModalOpen = true;
+  }
+
+  closeCompaniesListModal(): void {
+    this.isCompaniesListModalOpen = false;
   }
 }

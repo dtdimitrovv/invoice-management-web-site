@@ -47,9 +47,9 @@ export class CreateInvoiceModalComponent implements OnInit, OnChanges {
 
   loadCompanies(): void {
     this.invoiceService.getCompanies().subscribe({
-      next: (response) => {
-        this.customers = response.content.filter(company => company.type === 'CUSTOMER');
-        this.suppliers = response.content.filter(company => company.type === 'SUPPLIER');
+      next: (companies: Company[]) => {
+        this.customers = companies.filter((company: Company) => company.type === 'CUSTOMER');
+        this.suppliers = companies.filter((company: Company) => company.type === 'SUPPLIER');
         
         // Auto-select supplier if there's only one
         if (this.suppliers.length === 1) {
