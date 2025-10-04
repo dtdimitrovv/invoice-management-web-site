@@ -1,9 +1,9 @@
 import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { InvoiceService } from '../services/invoice.service';
-import { Invoice } from '../models/invoice.model';
-import { DateFormatPipe } from '../pipes/date-format.pipe';
+import { InvoiceService } from '../../services/invoice.service';
+import { Invoice } from '../../models/invoice.model';
+import { DateFormatPipe } from '../../pipes/date-format.pipe';
 
 @Component({
   selector: 'app-invoice-detail',

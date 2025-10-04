@@ -2,9 +2,9 @@ import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { InvoiceService } from '../services/invoice.service';
-import { Invoice, InvoiceResponse } from '../models/invoice.model';
-import { DateFormatPipe } from '../pipes/date-format.pipe';
+import { InvoiceService } from '../../services/invoice.service';
+import { Invoice, InvoiceResponse } from '../../models/invoice.model';
+import { DateFormatPipe } from '../../pipes/date-format.pipe';
 import { CreateInvoiceModalComponent } from '../create-invoice-modal/create-invoice-modal.component';
 
 @Component({

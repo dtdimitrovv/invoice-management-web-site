@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, Output, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { InvoiceService } from '../services/invoice.service';
-import { ToastService } from '../services/toast.service';
-import { Company } from '../models/company.model';
-import { InvoiceItem, CreateInvoiceRequest, InvoiceContent } from '../models/invoice-item.model';
+import { InvoiceService } from '../../services/invoice.service';
+import { ToastService } from '../../services/toast.service';
+import { Company } from '../../models/company.model';
+import { InvoiceItem, CreateInvoiceRequest, InvoiceContent } from '../../models/invoice-item.model';
 
 @Component({
   selector: 'app-create-invoice-modal',
