@@ -24,17 +24,18 @@
           <div class="table-container">
             <table class="companies-table">
               <thead>
-                <tr>
-                  <th>Име</th>
-                  <th>Адрес</th>
-                  <th>Идентификационен номер</th>
-                  <th>ДДС номер</th>
-                  <th>Отговорно лице</th>
-                  <th>Банков код</th>
-                  <th>Банка</th>
-                  <th>IBAN</th>
-                  <th>Действия</th>
-                </tr>
+                 <tr>
+                   <th>Име</th>
+                   <th>Адрес</th>
+                   <th>Идентификационен номер</th>
+                   <th>Тип</th>
+                   <th>ДДС номер</th>
+                   <th>Отговорно лице</th>
+                   <th>Банков код</th>
+                   <th>Банка</th>
+                   <th>IBAN</th>
+                   <th>Действия</th>
+                 </tr>
               </thead>
               <tbody>
                 @for (company of companies; track company.id) {
@@ -42,6 +43,7 @@
                     <td>{{ company.name }}</td>
                     <td>{{ company.address }}</td>
                     <td>{{ company.identityNumber }}</td>
+                    <td>{{ company.type === 'CUSTOMER' ? 'Клиент' : 'Доставчик' }}</td>
                     <td>{{ company.vatNumber }}</td>
                     <td>{{ company.responsibleOfficerName }}</td>
                     <td>{{ company.bankIdentifierCode }}</td>

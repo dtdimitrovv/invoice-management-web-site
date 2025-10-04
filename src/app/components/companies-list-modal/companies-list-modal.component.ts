@@ -13,6 +13,7 @@ import { Company } from '../../models/company.model';
 export class CompaniesListModalComponent implements OnInit, OnChanges {
   @Input() isOpen = false;
   @Output() close = new EventEmitter<void>();
+  @Output() companyDeleted = new EventEmitter<void>();
 
   companies: Company[] = [];
   loading = false;
@@ -56,9 +57,11 @@ export class CompaniesListModalComponent implements OnInit, OnChanges {
         next: () => {
           // Remove the company from the local array
           this.companies = this.companies.filter(company => company.id !== id);
+          // Emit event to refresh other components
+          this.companyDeleted.emit();
         },
         error: (error) => {
-          console.error('Error deleting company:', error);
+          console.error('Грешка при изтриване на компанията:', error);
           alert('Грешка при изтриване на компанията. Моля опитайте отново.');
         }
       });

@@ -170,4 +170,13 @@ export class HomeComponent implements OnInit {
   closeCompaniesListModal(): void {
     this.isCompaniesListModalOpen = false;
   }
+
+  onCompanyDeleted(): void {
+    // Trigger refresh of company lists in invoice modal
+    this.refreshInvoiceModalCompanies = true;
+    // Reset the flag after a short delay to allow the change detection to work
+    setTimeout(() => {
+      this.refreshInvoiceModalCompanies = false;
+    }, 100);
+  }
 }
