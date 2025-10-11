@@ -7,6 +7,3 @@ ARG CONFIG_ARG
 ENV CONFIG_ENV=$CONFIG_ARG
 RUN npm run ng build -- --configuration=${CONFIG_ENV} --output-hashing=all
 
-FROM nginx as runtime
-COPY .nginx/nginx.conf /etc/nginx/conf.d/default.conf
-COPY --from=build /app/dist/pc-admin /usr/share/nginx/html
