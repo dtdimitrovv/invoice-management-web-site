@@ -5,7 +5,7 @@
         <label>Дата на издаване:</label>
         <div class="date-value">{{ invoice?.issueDate | dateFormat }}</div>
       </div>
-      
+
       <div class="invoice-number-section">
         <div class="invoice-number">Фактура №{{ invoice?.serialNumber }}</div>
         <div class="invoice-type" *ngIf="invoiceType">{{ invoiceType }}</div>
@@ -78,14 +78,12 @@
   <div class="invoice-items-section">
     <div class="items-header">
       <h3>Артикули</h3>
-      @if (isEditable && !isEditMode) {
-        <button class="btn btn-edit" (click)="toggleEditMode()">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
-          </svg>
-          Редактирай артикули
-        </button>
-      }
+      <button class="btn btn-edit" (click)="toggleEditMode()" *ngIf="isEditable && !isEditMode">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+        </svg>
+        Редактирай артикули
+      </button>
     </div>
 
     <div class="items-table-container">
@@ -102,9 +100,9 @@
                 <div class="item-row">
                   <div class="item-field">
                     <label>Описание</label>
-                    <input 
-                      type="text" 
-                      [(ngModel)]="item.name" 
+                    <input
+                      type="text"
+                      [(ngModel)]="item.name"
                       name="itemName{{i}}"
                       required
                       class="form-input"
@@ -114,9 +112,9 @@
 
                   <div class="item-field">
                     <label>Количество</label>
-                    <input 
-                      type="number" 
-                      [(ngModel)]="item.quantity" 
+                    <input
+                      type="number"
+                      [(ngModel)]="item.quantity"
                       name="itemQuantity{{i}}"
                       required
                       min="1"
@@ -127,9 +125,9 @@
 
                   <div class="item-field">
                     <label>Единична цена</label>
-                    <input 
-                      type="number" 
-                      [(ngModel)]="item.unitPrice" 
+                    <input
+                      type="number"
+                      [(ngModel)]="item.unitPrice"
                       name="itemUnitPrice{{i}}"
                       required
                       min="0"
@@ -141,9 +139,9 @@
 
                   <div class="item-field">
                     <label>Отстъпка (%)</label>
-                    <input 
-                      type="number" 
-                      [(ngModel)]="item.discount" 
+                    <input
+                      type="number"
+                      [(ngModel)]="item.discount"
                       name="itemDiscount{{i}}"
                       min="0"
                       max="100"
@@ -159,9 +157,9 @@
                   </div>
 
                   <div class="item-actions">
-                    <button 
-                      type="button" 
-                      class="btn btn-remove" 
+                    <button
+                      type="button"
+                      class="btn btn-remove"
                       (click)="removeItem(i)"
                       [disabled]="editableItems.length === 1"
                       title="Премахни артикул"
@@ -232,7 +230,7 @@
       <div class="verbal-total-label">Основание за не начисляване на ДДС:</div>
       <div class="verbal-total-value">{{ invoice?.reasonForSkippingVat || 'Не е посочено' }}</div>
     </div>
-    
+
     <div class="financial-calculations">
       <div class="calculation-row">
         <span class="calculation-label">Данъчна основа:</span>
@@ -263,7 +261,7 @@
       <div class="signature-label">Фактурата e получена от: <span class="signature-name">{{ invoice?.client?.responsibleOfficerName }}</span></div>
       <div class="signature-line">Подпис: .................................</div>
     </div>
-    
+
     <div class="signature-block">
       <div class="signature-label">Фактурата е съставена от: <span class="signature-name">{{ invoice?.provider?.responsibleOfficerName }}</span></div>
       <div class="signature-line">Подпис: .................................</div>
@@ -278,14 +276,14 @@
 
   <div class="invoice-actions">
     <button class="back-button" (click)="goBack()">Назад</button>
-    
+
     @if (isEditMode) {
       <button class="btn btn-secondary" (click)="toggleEditMode()" [disabled]="loading">
         Отказ
       </button>
-      <button 
-        class="btn btn-primary" 
-        (click)="saveChanges()" 
+      <button
+        class="btn btn-primary"
+        (click)="saveChanges()"
         [disabled]="loading || editableItems.length === 0"
       >
         @if (loading) {

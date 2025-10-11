@@ -91,6 +91,6 @@
 
 @media print{
 .invoice-detail-container{max-width:none;margin:0;padding:0;box-shadow:none}
-.invoice-actions{display:none!important}
+.invoice-actions,.btn-edit{display:none!important}
 .invoice-detail-container *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }

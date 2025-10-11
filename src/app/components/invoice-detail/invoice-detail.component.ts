@@ -95,15 +95,19 @@ export class InvoiceDetailComponent implements OnInit {
     ]).then(([jsPDF, html2canvas]) => {
       const element = document.querySelector('.invoice-detail-container') as HTMLElement;
       const actionsElement = document.querySelector('.invoice-actions') as HTMLElement;
+      const editButtonElement = document.querySelector('.btn-edit') as HTMLElement;
       
       if (!element) {
         console.error('Invoice container not found');
         return;
       }
 
-      // Hide the action buttons before capturing
+      // Hide the action buttons and edit button before capturing
       if (actionsElement) {
         actionsElement.style.display = 'none';
+      }
+      if (editButtonElement) {
+        editButtonElement.style.display = 'none';
       }
 
       html2canvas.default(element, {
@@ -111,9 +115,12 @@ export class InvoiceDetailComponent implements OnInit {
         useCORS: true,
         backgroundColor: '#ffffff'
       }).then(canvas => {
-        // Show the action buttons again after capturing
+        // Show the action buttons and edit button again after capturing
         if (actionsElement) {
           actionsElement.style.display = 'flex';
+        }
+        if (editButtonElement) {
+          editButtonElement.style.display = 'flex';
         }
 
         // Clear the invoice type after capturing
@@ -145,6 +152,9 @@ export class InvoiceDetailComponent implements OnInit {
         // Make sure to show buttons again even if there's an error
         if (actionsElement) {
           actionsElement.style.display = 'flex';
+        }
+        if (editButtonElement) {
+          editButtonElement.style.display = 'flex';
         }
         // Clear the invoice type even if there's an error
         this.invoiceType = '';
