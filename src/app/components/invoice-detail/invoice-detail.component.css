@@ -59,25 +59,6 @@
 .print-copy-button{background-color:#007bff;color:white}
 .print-copy-button:hover{background-color:#0056b3}
 
-@media (max-width:768px){
-.invoice-detail-container{padding:10px}
-.invoice-info{flex-direction:column;gap:20px;text-align:center}
-.invoice-content{flex-direction:column;gap:20px}
-.detail-row{flex-direction:column;align-items:flex-start;gap:5px}
-.value{text-align:left}
-.items-table{font-size:0.85rem}
-.items-table th,.items-table td{padding:8px 4px}
-.col-description{width:30%}
-.col-quantity{width:8%}
-.col-unit-price,.col-discount,.col-total{width:12%}
-.financial-summary-section{flex-direction:column;gap:20px}
-.verbal-total{margin-right:0}
-.calculation-row{flex-direction:column;align-items:flex-start;gap:5px}
-.calculation-value{text-align:left;min-width:auto}
-.signatures-section{flex-direction:column;gap:20px}
-.signature-block{gap:10px}
-}
-
 .items-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
 .items-header h3{margin:0;text-align:left;border-bottom:none;padding-bottom:0}
 .btn-edit,.btn-add,.btn-remove,.btn{border:none;border-radius:4px;cursor:pointer;font-size:14px;font-weight:500;display:flex;align-items:center;gap:8px;transition:background-color 0.2s ease}
@@ -108,12 +89,6 @@
 .total-amount{color:#28a745;font-size:18px}
 .no-items{padding:40px 20px;text-align:center;color:#6c757d;font-style:italic}
 
-@media (max-width:768px){
-.item-row{grid-template-columns:1fr;gap:12px}
-.item-field{width:100%}
-.item-actions{justify-content:flex-start}
-.total-row{flex-direction:column;gap:8px;text-align:center}
-}
 @media print{
 .invoice-detail-container{max-width:none;margin:0;padding:0;box-shadow:none}
 .invoice-actions{display:none!important}
