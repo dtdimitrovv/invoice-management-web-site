@@ -1,0 +1,302 @@
+<div class="invoice-detail-container">
+  <div class="invoice-header">
+    <div class="invoice-info">
+      <div class="date-section">
+        <label>Дата на издаване:</label>
+        <div class="date-value">{{ invoice?.issueDate | dateFormat }}</div>
+      </div>
+      
+      <div class="invoice-number-section">
+        <div class="invoice-number">Фактура №{{ invoice?.serialNumber }}</div>
+        <div class="invoice-type" *ngIf="invoiceType">{{ invoiceType }}</div>
+      </div>
+
+      <div class="invoice-location-section">
+        <label>Място на издаване:</label>
+        <div class="invoice-location">{{ invoice?.issueLocation }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="invoice-content">
+    <div class="recipient-section">
+      <h3>ПОЛУЧАТЕЛ</h3>
+      <div class="company-details">
+        <div class="company-name">{{ invoice?.client?.name }}</div>
+        <div class="detail-row">
+          <span class="label">ЕИК:</span>
+          <span class="value">{{ invoice?.client?.identityNumber }}</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">ЕИК по ЗДДС:</span>
+          <span class="value">{{ invoice?.client?.vatNumber }}</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">Адрес:</span>
+          <span class="value">{{ invoice?.client?.address }}</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">МОЛ:</span>
+          <span class="value">{{ invoice?.client?.responsibleOfficerName }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="supplier-section">
+      <h3>ДОСТАВЧИК</h3>
+      <div class="company-details">
+        <div class="company-name">{{ invoice?.provider?.name }}</div>
+        <div class="detail-row">
+          <span class="label">ЕИК:</span>
+          <span class="value">{{ invoice?.provider?.identityNumber }}</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">ЕИК по ЗДДС:</span>
+          <span class="value">{{ invoice?.provider?.vatNumber }}</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">Адрес:</span>
+          <span class="value">{{ invoice?.provider?.address }}</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">МОЛ:</span>
+          <span class="value">{{ invoice?.provider?.responsibleOfficerName }}</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">BIC/Банка:</span>
+          <span class="value">{{ invoice?.provider?.bankIdentifierCode }}/{{ invoice?.provider?.bankName }}</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">IBAN:</span>
+          <span class="value">{{ invoice?.provider?.iban }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Invoice Items Table -->
+  <div class="invoice-items-section">
+    <div class="items-header">
+      <h3>Артикули</h3>
+      @if (isEditable && !isEditMode) {
+        <button class="btn btn-edit" (click)="toggleEditMode()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+          </svg>
+          Редактирай артикули
+        </button>
+      }
+    </div>
+
+    <div class="items-table-container">
+      @if (isEditMode) {
+        <!-- Editable Items Table -->
+        <div class="editable-items">
+          @if (editableItems.length === 0) {
+            <div class="no-items">
+              <p>Няма добавени артикули</p>
+            </div>
+          } @else {
+            <div class="items-list">
+              @for (item of editableItems; track item.id; let i = $index) {
+                <div class="item-row">
+                  <div class="item-field">
+                    <label>Описание</label>
+                    <input 
+                      type="text" 
+                      [(ngModel)]="item.name" 
+                      name="itemName{{i}}"
+                      required
+                      class="form-input"
+                      placeholder="Въведете описание на артикула"
+                    >
+                  </div>
+
+                  <div class="item-field">
+                    <label>Количество</label>
+                    <input 
+                      type="number" 
+                      [(ngModel)]="item.quantity" 
+                      name="itemQuantity{{i}}"
+                      required
+                      min="1"
+                      class="form-input"
+                      placeholder="1"
+                    >
+                  </div>
+
+                  <div class="item-field">
+                    <label>Единична цена</label>
+                    <input 
+                      type="number" 
+                      [(ngModel)]="item.unitPrice" 
+                      name="itemUnitPrice{{i}}"
+                      required
+                      min="0"
+                      step="0.01"
+                      class="form-input"
+                      placeholder="0.00"
+                    >
+                  </div>
+
+                  <div class="item-field">
+                    <label>Отстъпка (%)</label>
+                    <input 
+                      type="number" 
+                      [(ngModel)]="item.discount" 
+                      name="itemDiscount{{i}}"
+                      min="0"
+                      max="100"
+                      step="0.01"
+                      class="form-input"
+                      placeholder="0"
+                    >
+                  </div>
+
+                  <div class="item-field">
+                    <label>Стойност</label>
+                    <div class="item-total">{{ calculateItemTotal(item) | number:'1.2-2' }}</div>
+                  </div>
+
+                  <div class="item-actions">
+                    <button 
+                      type="button" 
+                      class="btn btn-remove" 
+                      (click)="removeItem(i)"
+                      [disabled]="editableItems.length === 1"
+                      title="Премахни артикул"
+                    >
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              }
+            </div>
+
+            <div class="total-section">
+              <div class="total-row">
+                <span class="total-label">Обща сума:</span>
+                <span class="total-amount">{{ calculateTotal | number:'1.2-2' }}</span>
+              </div>
+            </div>
+          }
+
+          <div class="edit-actions">
+            <button type="button" class="btn btn-add" (click)="addItem()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+              </svg>
+              Добави артикул
+            </button>
+          </div>
+        </div>
+      } @else {
+        <!-- Read-only Items Table -->
+        <table class="items-table">
+          <thead>
+            <tr>
+              <th class="col-number">№</th>
+              <th class="col-description">Описание</th>
+              <th class="col-quantity">Количество</th>
+              <th class="col-unit-price">Ед. цена</th>
+              <th class="col-discount">Отстъпка</th>
+              <th class="col-total">Стойност</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (item of invoice?.contents; track $index; let i = $index) {
+              <tr>
+                <td class="col-number">{{ i + 1 }}</td>
+                <td class="col-description">{{ item.serviceDescription }}</td>
+                <td class="col-quantity">{{ item.quantity }}</td>
+                <td class="col-unit-price">{{ item.unitPrice | number:'1.2-2' }}</td>
+                <td class="col-discount">{{ item.discount | number:'1.2-2' }}%</td>
+                <td class="col-total">{{ item.totalPriceInBulgarianLev | number:'1.2-2' }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      }
+    </div>
+  </div>
+
+  <!-- Financial Summary Section -->
+  <div class="financial-summary-section">
+    <div class="verbal-total">
+      <div class="verbal-total-label">Словом в лева:</div>
+      <div class="verbal-total-value">{{ invoice?.verbalTotalPriceWithVatInBulgarianLev || 'Не е посочена' }}</div>
+      <div class="verbal-total-label">Словом в евро:</div>
+      <div class="verbal-total-value">{{ invoice?.verbalTotalPriceWithVatInEuro || 'Не е посочена' }}</div>
+      <div class="verbal-total-label">Основание за не начисляване на ДДС:</div>
+      <div class="verbal-total-value">{{ invoice?.reasonForSkippingVat || 'Не е посочено' }}</div>
+    </div>
+    
+    <div class="financial-calculations">
+      <div class="calculation-row">
+        <span class="calculation-label">Данъчна основа:</span>
+        <span class="calculation-value">{{ getTaxableBase() | number:'1.2-2' }}</span>
+      </div>
+      <div class="calculation-row">
+        <span class="calculation-label">Ставка ДДС:</span>
+        <span class="calculation-value">20%</span>
+      </div>
+      <div class="calculation-row">
+        <span class="calculation-label">ДДС:</span>
+        <span class="calculation-value">{{ getVAT() | number:'1.2-2' }}</span>
+      </div>
+        <div class="calculation-row">
+          <span class="calculation-label">Сума за плащане в лева:</span>
+          <span class="calculation-value">{{ getTotalAmountInBulgarianLev() | number:'1.2-2' }}</span>
+        </div>
+        <div class="calculation-row">
+          <span class="calculation-label">Сума за плащане в евро:</span>
+          <span class="calculation-value">{{ getTotalAmountInEuro() | number:'1.2-2' }}</span>
+        </div>
+    </div>
+  </div>
+
+  <!-- Signatures Section -->
+  <div class="signatures-section">
+    <div class="signature-block">
+      <div class="signature-label">Фактурата e получена от: <span class="signature-name">{{ invoice?.client?.responsibleOfficerName }}</span></div>
+      <div class="signature-line">Подпис: .................................</div>
+    </div>
+    
+    <div class="signature-block">
+      <div class="signature-label">Фактурата е съставена от: <span class="signature-name">{{ invoice?.provider?.responsibleOfficerName }}</span></div>
+      <div class="signature-line">Подпис: .................................</div>
+    </div>
+  </div>
+
+  <!-- Legal Disclaimer -->
+  <div class="legal-disclaimer">
+    <p>Печатът и подписът не са задължителни реквизити на фактурата съгласно<br>
+    чл.7, ал. 1 от Закона за счетоводството, чл.114 от ЗДДС и чл.78 от ППЗДДС</p>
+  </div>
+
+  <div class="invoice-actions">
+    <button class="back-button" (click)="goBack()">Назад</button>
+    
+    @if (isEditMode) {
+      <button class="btn btn-secondary" (click)="toggleEditMode()" [disabled]="loading">
+        Отказ
+      </button>
+      <button 
+        class="btn btn-primary" 
+        (click)="saveChanges()" 
+        [disabled]="loading || editableItems.length === 0"
+      >
+        @if (loading) {
+          Запазване...
+        } @else {
+          Запази промените
+        }
+      </button>
+    } @else {
+      <button class="print-original-button" (click)="printInvoice('original')">Печат на оригинал</button>
+      <button class="print-copy-button" (click)="printInvoice('copy')">Печат на копие</button>
+    }
+  </div>
+</div>

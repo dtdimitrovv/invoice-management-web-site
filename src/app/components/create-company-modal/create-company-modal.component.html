@@ -1,0 +1,149 @@
+@if (isOpen) {
+  <div class="modal-overlay" (click)="onClose()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>Добави компания</h2>
+        <button class="close-button" (click)="onClose()" type="button">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+          </svg>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+        <form (ngSubmit)="onSubmit()" #companyForm="ngForm">
+          <!-- Company Information -->
+          <div class="form-section">
+            <h3>Информация за компанията</h3>
+            
+            <div class="form-group">
+              <label for="name">Име на компанията *</label>
+              <input 
+                type="text" 
+                id="name"
+                name="name"
+                [(ngModel)]="companyData.name" 
+                required
+                class="form-input"
+                placeholder="Въведете име на компанията"
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="address">Адрес *</label>
+              <textarea 
+                id="address"
+                name="address"
+                [(ngModel)]="companyData.address" 
+                required
+                class="form-textarea"
+                placeholder="Въведете адрес на компанията"
+                rows="3"
+              ></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="identityNumber">ЕИК *</label>
+              <input 
+                type="text" 
+                id="identityNumber"
+                name="identityNumber"
+                [(ngModel)]="companyData.identityNumber" 
+                required
+                class="form-input"
+                placeholder="Въведете ЕИК"
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="vatNumber">ДДС номер *</label>
+              <input 
+                type="text" 
+                id="vatNumber"
+                name="vatNumber"
+                [(ngModel)]="companyData.vatNumber" 
+                required
+                class="form-input"
+                placeholder="Въведете ДДС номер"
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="responsibleOfficerName">Отговорно лице *</label>
+              <input 
+                type="text" 
+                id="responsibleOfficerName"
+                name="responsibleOfficerName"
+                [(ngModel)]="companyData.responsibleOfficerName" 
+                required
+                class="form-input"
+                placeholder="Въведете име на отговорното лице"
+              >
+            </div>
+          </div>
+
+          <!-- Banking Information -->
+          <div class="form-section">
+            <h3>Банкова информация</h3>
+            
+            <div class="form-group">
+              <label for="bankIdentifierCode">BIC код *</label>
+              <input 
+                type="text" 
+                id="bankIdentifierCode"
+                name="bankIdentifierCode"
+                [(ngModel)]="companyData.bankIdentifierCode" 
+                required
+                class="form-input"
+                placeholder="Въведете BIC код на банката"
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="bankName">Име на банката *</label>
+              <input 
+                type="text" 
+                id="bankName"
+                name="bankName"
+                [(ngModel)]="companyData.bankName" 
+                required
+                class="form-input"
+                placeholder="Въведете име на банката"
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="iban">IBAN *</label>
+              <input 
+                type="text" 
+                id="iban"
+                name="iban"
+                [(ngModel)]="companyData.iban" 
+                required
+                class="form-input"
+                placeholder="Въведете IBAN"
+              >
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" (click)="onClose()">
+              Отказ
+            </button>
+            <button 
+              type="submit" 
+              class="btn btn-primary" 
+              [disabled]="!companyForm.form.valid || loading"
+            >
+              @if (loading) {
+                Запазване...
+              } @else {
+                Запази компания
+              }
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+}

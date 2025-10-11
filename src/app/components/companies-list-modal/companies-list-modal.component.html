@@ -1,0 +1,72 @@
+@if (isOpen) {
+  <div class="modal-overlay" (click)="onClose()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>Списък с компании</h2>
+        <button class="close-button" (click)="onClose()" type="button">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+          </svg>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+        @if (loading) {
+          <div class="loading">
+            <p>Зареждане на компании...</p>
+          </div>
+        } @else if (error) {
+          <div class="error">
+            <p>{{ error }}</p>
+            <button (click)="loadCompanies()">Опитай отново</button>
+          </div>
+        } @else {
+          <div class="table-container">
+            <table class="companies-table">
+              <thead>
+                 <tr>
+                   <th>Име</th>
+                   <th>Адрес</th>
+                   <th>Идентификационен номер</th>
+                   <th>Тип</th>
+                   <th>ДДС номер</th>
+                   <th>Отговорно лице</th>
+                   <th>Банков код</th>
+                   <th>Банка</th>
+                   <th>IBAN</th>
+                   <th>Действия</th>
+                 </tr>
+              </thead>
+              <tbody>
+                @for (company of companies; track company.id) {
+                  <tr>
+                    <td>{{ company.name }}</td>
+                    <td>{{ company.address }}</td>
+                    <td>{{ company.identityNumber }}</td>
+                    <td>{{ company.type === 'CUSTOMER' ? 'Клиент' : 'Доставчик' }}</td>
+                    <td>{{ company.vatNumber }}</td>
+                    <td>{{ company.responsibleOfficerName }}</td>
+                    <td>{{ company.bankIdentifierCode }}</td>
+                    <td>{{ company.bankName }}</td>
+                    <td>{{ company.iban }}</td>
+                    <td>
+                      <button 
+                        class="delete-button" 
+                        (click)="deleteCompany(company.id)"
+                        title="Изтрий компания"
+                      >
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
+                        </svg>
+                      </button>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+}
