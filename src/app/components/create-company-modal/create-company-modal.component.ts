@@ -68,10 +68,7 @@ export class CreateCompanyModalComponent {
       this.companyData.address.trim() &&
       this.companyData.identityNumber.trim() &&
       this.companyData.vatNumber.trim() &&
-      this.companyData.responsibleOfficerName.trim() &&
-      this.companyData.bankIdentifierCode.trim() &&
-      this.companyData.bankName.trim() &&
-      this.companyData.iban.trim()
+      this.companyData.responsibleOfficerName.trim()
     );
   }
 
