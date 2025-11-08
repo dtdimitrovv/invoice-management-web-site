@@ -3,7 +3,16 @@
     <div class="invoice-info">
       <div class="date-section">
         <label>Дата на издаване:</label>
-        <div class="date-value">{{ invoice?.issueDate | dateFormat }}</div>
+        @if (isEditMode) {
+          <input
+            type="date"
+            [(ngModel)]="editableIssueDate"
+            name="issueDate"
+            class="form-input date-input"
+          >
+        } @else {
+          <div class="date-value">{{ invoice?.issueDate | dateFormat }}</div>
+        }
       </div>
 
       <div class="invoice-number-section">
@@ -237,9 +246,9 @@
         <span class="calculation-value">{{ getTaxableBase() | number:'1.2-2' }}</span>
       </div>
       <div class="calculation-row">
-        <span class="calculation-label">Ставка ДДС:</span>
+        <span class="calculation-label">Ставка ДДС 20%:</span>
         <span class="calculation-value">20%</span>
-      </div>
+      </div>  
       <div class="calculation-row">
         <span class="calculation-label">ДДС:</span>
         <span class="calculation-value">{{ getVAT() | number:'1.2-2' }}</span>
