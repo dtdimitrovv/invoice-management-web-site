@@ -17,4 +17,5 @@ export interface CreateInvoiceRequest {
   clientId: number;
   contents: InvoiceContent[];
   reasonForSkippingVat?: string;
+  issueDate?: string; // LocalDate format: YYYY-MM-DD
 }

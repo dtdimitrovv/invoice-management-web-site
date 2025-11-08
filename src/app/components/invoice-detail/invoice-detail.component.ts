@@ -25,6 +25,8 @@ export class InvoiceDetailComponent implements OnInit {
   isEditable: boolean = false;
   editableItems: InvoiceItem[] = [];
   originalItems: InvoiceItem[] = [];
+  editableIssueDate: string = '';
+  originalIssueDate: string = '';
   nextItemId = 1;
   loading = false;
 
@@ -208,6 +210,14 @@ export class InvoiceDetailComponent implements OnInit {
     
     this.originalItems = JSON.parse(JSON.stringify(this.editableItems));
     this.nextItemId = this.editableItems.length + 1;
+    
+    // Initialize editable issue date
+    if (this.invoice?.issueDate && Array.isArray(this.invoice.issueDate) && this.invoice.issueDate.length === 3) {
+      const [year, month, day] = this.invoice.issueDate;
+      // Format as YYYY-MM-DD for date input
+      this.editableIssueDate = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+      this.originalIssueDate = this.editableIssueDate;
+    }
   }
 
   toggleEditMode(): void {
@@ -216,8 +226,9 @@ export class InvoiceDetailComponent implements OnInit {
     this.isEditMode = !this.isEditMode;
     
     if (!this.isEditMode) {
-      // Cancel edit mode - revert to original items
+      // Cancel edit mode - revert to original items and date
       this.editableItems = JSON.parse(JSON.stringify(this.originalItems));
+      this.editableIssueDate = this.originalIssueDate;
     }
   }
 
@@ -279,6 +290,11 @@ export class InvoiceDetailComponent implements OnInit {
       contents: contents,
       reasonForSkippingVat: this.invoice.reasonForSkippingVat
     };
+
+    // Add issueDate if it has been changed (optional field)
+    if (this.editableIssueDate && this.editableIssueDate !== this.originalIssueDate) {
+      updateData.issueDate = this.editableIssueDate;
+    }
 
     this.invoiceService.updateInvoice(this.invoice.id, updateData).subscribe({
       next: (response) => {

@@ -34,6 +34,13 @@
     font-size: 16px
 }
 
+.date-input {
+    font-size: 16px;
+    padding: 6px 12px;
+    width: 100%;
+    max-width: 200px
+}
+
 .invoice-number-section {
     flex: 2
 }
