@@ -16,7 +16,7 @@
       </div>
 
       <div class="invoice-number-section">
-        <div class="invoice-number">Фактура №{{ invoice?.serialNumber }}</div>
+        <div class="invoice-number">Фактура №{{ getSerialNumberWithPrefixZeros() }}</div>
         <div class="invoice-type" *ngIf="invoiceType">{{ invoiceType }}</div>
       </div>
 

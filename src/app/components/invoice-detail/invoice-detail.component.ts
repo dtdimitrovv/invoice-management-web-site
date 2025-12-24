@@ -183,6 +183,10 @@ export class InvoiceDetailComponent implements OnInit {
     return this.invoice?.totalPriceWithVatInEuro || 0;
   }
 
+  getSerialNumberWithPrefixZeros(): string {
+    return this.invoice?.serialNumber.toString().padStart(10, '0') || '';
+  }
+
   checkIfEditable(): void {
     if (!this.invoice?.issueDate) {
       this.isEditable = false;
