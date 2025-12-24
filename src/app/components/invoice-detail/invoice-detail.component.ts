@@ -168,15 +168,11 @@ export class InvoiceDetailComponent implements OnInit {
   }
 
   getTaxableBase(): number {
-    return this.invoice?.totalPriceWithoutVatInBulgarianLev || 0;
+    return this.invoice?.totalPriceWithoutVatInEuro || 0;
   }
 
   getVAT(): number {
-    return this.invoice?.vatSumInBulgarianLev || 0;
-  }
-
-  getTotalAmountInBulgarianLev(): number {
-    return this.invoice?.totalPriceWithVatInBulgarianLev || 0;
+    return this.invoice?.vatSumInEuro || 0;
   }
 
   getTotalAmountInEuro(): number {

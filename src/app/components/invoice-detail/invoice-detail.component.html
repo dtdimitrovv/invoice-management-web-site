@@ -231,8 +231,6 @@
   <!-- Financial Summary Section -->
   <div class="financial-summary-section">
     <div class="verbal-total">
-      <div class="verbal-total-label">Словом в лева:</div>
-      <div class="verbal-total-value">{{ invoice?.verbalTotalPriceWithVatInBulgarianLev || 'Не е посочена' }}</div>
       <div class="verbal-total-label">Словом в евро:</div>
       <div class="verbal-total-value">{{ invoice?.verbalTotalPriceWithVatInEuro || 'Не е посочена' }}</div>
       <div class="verbal-total-label">Основание за не начисляване на ДДС:</div>
@@ -252,10 +250,6 @@
         <span class="calculation-label">ДДС:</span>
         <span class="calculation-value">{{ getVAT() | number:'1.2-2' }}</span>
       </div>
-        <div class="calculation-row">
-          <span class="calculation-label">Сума за плащане в лева:</span>
-          <span class="calculation-value">{{ getTotalAmountInBulgarianLev() | number:'1.2-2' }}</span>
-        </div>
         <div class="calculation-row">
           <span class="calculation-label">Сума за плащане в евро:</span>
           <span class="calculation-value">{{ getTotalAmountInEuro() | number:'1.2-2' }}</span>
