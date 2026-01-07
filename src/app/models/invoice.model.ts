@@ -27,11 +27,9 @@ export interface Invoice {
   provider: Company;
   client: Company;
   contents: InvoiceContent[];
-  totalPriceWithoutVatInBulgarianLev: number;
-  totalPriceWithVatInBulgarianLev: number;
   totalPriceWithVatInEuro: number;
-  vatSumInBulgarianLev: number;
-  verbalTotalPriceWithVatInBulgarianLev: string;
+  totalPriceWithoutVatInEuro: number;
+  vatSumInEuro: number;
   verbalTotalPriceWithVatInEuro: string;
   reasonForSkippingVat: string;
 }
