@@ -254,6 +254,10 @@
           <span class="calculation-label">Сума за плащане в евро:</span>
           <span class="calculation-value">{{ getTotalAmountInEuro() | number:'1.2-2' }}</span>
         </div>
+      <div class="calculation-row">
+        <span class="calculation-label">Сума за плащане в лева:</span>
+        <span class="calculation-value">{{ (getTotalAmountInEuro() * 1.95583) | number:'1.2-2' }}</span>
+      </div>
     </div>
   </div>
 
